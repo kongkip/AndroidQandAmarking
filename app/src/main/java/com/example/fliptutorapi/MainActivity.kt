@@ -3,6 +3,7 @@ package com.example.fliptutorapi
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -28,10 +29,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         make_request.setOnClickListener {
-            val correctAnswer = correct_answer.selectAll()
-            val studentAnswer = student_answer.selectAll()
-            run("http://kongaevans.pythonanywhere.com/?correct_answer=" +
-                    "%27$correctAnswer%27&student_answer=%27$studentAnswer%27")
+            val correctAnswer = findViewById<EditText>(R.id.correct_answer)
+            val studentAnswer = findViewById<EditText>(R.id.student_answer)
+//            Toast.makeText(this, studentAnswer.text,Toast.LENGTH_LONG).show()
+            run("http://kongaevans.pythonanywhere.com/?correct_answer='${correctAnswer.text}'" +
+                    "&student_answer='${studentAnswer.text}'")
         }
         clear.setOnClickListener {
             result.text = "Empty Result"
